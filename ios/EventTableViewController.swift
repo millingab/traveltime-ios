@@ -18,6 +18,12 @@ class EventTableViewController: UITableViewController {
         super.viewDidLoad()
 
         loadSampleEvents()
+        
+        // Test get request 
+        let requestmaker = ManagementServer()
+        
+        requestmaker.getEventsList()
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
