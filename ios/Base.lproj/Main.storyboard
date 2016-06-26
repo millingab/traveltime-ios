@@ -117,7 +117,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Event" id="g5G-Dc-rGV">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ruc-nR-kp5"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ruc-nR-kp5">
+                            <connections>
+                                <action selector="cancel:" destination="BYZ-38-t0r" id="m7W-2j-G6o"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Sh0-Tw-9R0">
                             <connections>
                                 <segue destination="e2l-ac-4Hy" kind="unwind" unwindAction="unwindToEventList:" id="7hc-CF-3AJ"/>
