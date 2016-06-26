@@ -11,7 +11,7 @@ import UIKit
 class Event: NSObject {
     
     // MARK: Properties
-    
+    var id: String
     var name: String
     //var startDate: NSDate
     //var endDate: NSDate
@@ -22,8 +22,20 @@ class Event: NSObject {
     
     // Failable initializer
     init?(name: String) {
+        
         self.name = name
+        self.id = ""
+        
+        if name.isEmpty {
+            return nil
+        }
+    }
     
+    init?(name: String, id: String) {
+        
+        self.name = name
+        self.id = id
+        
         if name.isEmpty {
             return nil
         }

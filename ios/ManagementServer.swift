@@ -10,6 +10,8 @@ import Alamofire
 
 class ManagementServer{
     
+    // MARK: Declarations
+    
     static let sharedInstance = ManagementServer()
     
     typealias EventCallback = ([Event]?, NSError?)->()
@@ -39,8 +41,9 @@ class ManagementServer{
                     self.events.removeAll()
                     if let JSON = response.result.value as? NSArray{
                         for eventJSON in JSON{
-                            if let eventName = eventJSON["name"] as? String{
-                                let event = Event(name: eventName)
+                            if let eventName = eventJSON["name"] as? String,
+                                eventId = eventJSON["_id"] as? String {
+                                let event = Event(name: eventName, id: eventId)
                                 self.events.append(event!)
                             }
                         }
@@ -76,6 +79,30 @@ class ManagementServer{
                     if let cb = callback{
                         cb(error)
                     }
+            }
+        }
+    }
+    
+    func updateEvent(event: Event,callback: GeneralCallback?){
+        let params = [
+            "name": event.name,
+            ]
+        
+        print(event.name, event.id)
+        
+        Alamofire
+            .request(.PUT, BASE_URL+EVENT_PATH+event.id, parameters: params, encoding: .JSON)
+            .responseJSON{response in switch response.result {
+                
+            case .Success:
+                if let cb = callback{
+                    cb(nil)
+                }
+            case .Failure(let error):
+                debugPrint(response)
+                if let cb = callback{
+                    cb(error)
+                }
             }
         }
     }

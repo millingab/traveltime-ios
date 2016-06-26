@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventViewController: UIViewController {
+class EventViewController: UIViewController, CreateEventViewControllerDelegate {
 
     // MARK: Properties
     
@@ -37,7 +37,20 @@ class EventViewController: UIViewController {
         if segue.identifier == "EditEvent" {
             let navigationViewController = segue.destinationViewController as! UINavigationController
             let editEventViewController = navigationViewController.topViewController as! CreateEventViewController
+            editEventViewController.delegate = self
             editEventViewController.event = self.event
+        }
+    }
+    
+    // MARK: CreateTableViewControllerDelegate
+    
+    func onDismiss(event: Event?) {
+        if let e = event{
+            ManagementServer.sharedInstance.updateEvent(e) { error in
+                if let _ = error {
+                    debugPrint("There was a problem in updating the event: \(error)");
+                }
+            }
         }
     }
 }

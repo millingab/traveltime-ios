@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventTableViewController: UITableViewController {
+class EventTableViewController: UITableViewController, CreateEventViewControllerDelegate {
     
     // MARK: Properties
     
@@ -104,28 +104,26 @@ class EventTableViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
         if segue.identifier == "ViewEvent" {
-            let _EventViewController = segue.destinationViewController as! EventViewController
+            let eventViewController = segue.destinationViewController as! EventViewController
             
             if let selectedEventCell = sender as? EventTableViewCell {
                 let indexPath = tableView.indexPathForCell(selectedEventCell)!
                 let selectedEvent = events[indexPath.row]
-                _EventViewController.event = selectedEvent;
+                eventViewController.event = selectedEvent;
             }
             
         }
         else if segue.identifier == "AddEvent" {
-            print("Adding an event")
+            let navigationController = segue.destinationViewController as! UINavigationController
+            let createEventViewController = navigationController.topViewController as! CreateEventViewController
+            createEventViewController.delegate = self
         }
-        
     }
     
-    @IBAction func unwindToEventList(sender: UIStoryboardSegue) {
-        if let sourceViewController = sender.sourceViewController as?
-            CreateEventViewController, event = sourceViewController.event {
-            
-            self.postEventToServer(event)
-            
-        }
+    // MARK: CreateEventViewControllerDelegate
+    
+    func onDismiss(event: Event?) {
+        createEvent(event)
     }
     
     // MARK: Helpers
@@ -137,27 +135,24 @@ class EventTableViewController: UITableViewController {
                     self.events = e
                 }
             }
-            for event in self.events{
-                print(event.name)
-            }
+            
             self.tableView.reloadData()
             
             if let _ = error {
-                debugPrint("There was a problem fetching eventlist: \(error)");
+                debugPrint("There was a problem in fetching Event list: \(error)");
             }
         }
     }
     
-    func postEventToServer(event: Event?) {
+    func createEvent(event: Event?){
         if let e = event{
             ManagementServer.sharedInstance.createEvent(e) { error in
                 self.fetchAndDisplayEvents()
                 
                 if let _ = error {
-                    debugPrint("There was a problem creating the event: \(error)");
+                    debugPrint("There was a problem in creating the event: \(error)");
                 }
             }
         }
     }
-
 }

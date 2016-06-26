@@ -8,8 +8,16 @@
 
 import UIKit
 
-class CreateEventViewController: UIViewController, UITextFieldDelegate {
+protocol CreateEventViewControllerDelegate: class {
+    func onDismiss(event: Event?)
+}
 
+class CreateEventViewController: UIViewController, UITextFieldDelegate {
+    
+    // MARK: Declarations
+
+    typealias DismissCallback = (UIViewController)->()
+    
     // MARK: Properties
 
     @IBOutlet weak var eventName: UITextField!
@@ -17,6 +25,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var eventAllDay: UISwitch!
     @IBOutlet weak var eventStartTime: UIDatePicker!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    weak var delegate: CreateEventViewControllerDelegate?
+    
     
     var event: Event?
     
@@ -27,11 +38,12 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
         // Handle the text field’s user input through delegate callbacks.
         eventName.delegate = self
         
-        // Enable the Save button only if the text field has a valid Event name.
-        checkValidEventName()
-        
         // Set up the view
         navigationItem.title = event?.name ?? "New Event"
+        eventName.text = event?.name
+        
+        // Enable the Save button only if the text field has a valid Event name.
+        checkValidEventName()
 
     }
 
@@ -58,7 +70,8 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     }
     
     func checkValidEventName() {
-        // Disable the Save button if the text field is empty.
+        // Disa ble the Save button if the text field is empty.
+        
         let text = eventName.text ?? ""
         
         saveButton.enabled = !text.isEmpty
@@ -70,16 +83,38 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if saveButton === sender {
-            event = Event(name: eventName.text ?? "")
-        }
+    @IBAction func save(sender: UIBarButtonItem) {
+        dismissViewControllerAnimated(true, completion: {
+            let event = self.event ?? Event(name: self.eventName.text!)
+            event!.name = self.eventName.text!
+            self.delegate?.onDismiss(event)
+            })
     }
+    /*
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if let eventTableViewController = segue.destinationViewController as? EventTableViewController{
+            if saveButton === sender {
+                event = Event(name: eventName.text ?? "")
+            }
+            eventTableViewController.createEvent(event)
+        }
+        if segue.destinationViewController is EventViewController {
+            if let e = event{
+                ManagementServer.sharedInstance.updateEvent(e) { error in
+                    if let _ = error {
+                        debugPrint("There was a problem in updating the event: \(error)");
+                    }
+                }
+            }
+        }
+    }*/
     
     // MARK: Actions
     
     @IBAction func createEvent(sender: UIButton) {
     }
+    
 
 }
 

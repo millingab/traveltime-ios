@@ -125,7 +125,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="Sh0-Tw-9R0">
                             <connections>
-                                <segue destination="e2l-ac-4Hy" kind="unwind" unwindAction="unwindToEventList:" id="7hc-CF-3AJ"/>
+                                <action selector="save:" destination="BYZ-38-t0r" id="vef-dD-rAn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -138,9 +138,8 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <exit id="e2l-ac-4Hy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2095" y="814"/>
+            <point key="canvasLocation" x="2104" y="804"/>
         </scene>
         <!--Event-->
         <scene sceneID="Dk7-ev-fQs">
@@ -210,7 +209,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vIt-HN-o9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1351" y="814"/>
+            <point key="canvasLocation" x="1349" y="804"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
