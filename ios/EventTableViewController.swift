@@ -19,7 +19,6 @@ class EventTableViewController: UITableViewController, CreateEventViewController
 
         
         // Fetch and display the events
-        
         fetchAndDisplayEvents()
         
         // Uncomment the following line to preserve selection between presentations
@@ -62,25 +61,25 @@ class EventTableViewController: UITableViewController, CreateEventViewController
     }
  
 
-    /*
+    
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
+ 
 
-    /*
+    
     // Override to support editing the table view.
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            deleteEvent(self.events[indexPath.row])
         } else if editingStyle == .Insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    */
+    
 
     /*
     // Override to support rearranging the table view.
@@ -148,6 +147,17 @@ class EventTableViewController: UITableViewController, CreateEventViewController
     func createEvent(event: Event?){
         if let e = event{
             ManagementServer.sharedInstance.createEvent(e) { error in
+                self.fetchAndDisplayEvents()
+                
+                if let _ = error {
+                    debugPrint("There was a problem in creating the event: \(error)");
+                }
+            }
+        }
+    }
+    func deleteEvent(event: Event?){
+        if let e = event{
+            ManagementServer.sharedInstance.deleteEvent(e) { error in
                 self.fetchAndDisplayEvents()
                 
                 if let _ = error {

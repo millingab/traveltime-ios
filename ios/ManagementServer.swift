@@ -103,4 +103,22 @@ class ManagementServer{
             }
         }
     }
+    
+    func deleteEvent(event: Event,callback: GeneralCallback?){
+        Alamofire
+            .request(.DELETE, BASE_URL+EVENT_PATH+event.id)
+            .responseJSON{response in switch response.result {
+                
+            case .Success:
+                if let cb = callback{
+                    cb(nil)
+                }
+            case .Failure(let error):
+                debugPrint(response)
+                if let cb = callback{
+                    cb(error)
+                }
+                }
+        }
+    }
 }

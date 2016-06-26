@@ -16,7 +16,7 @@ class EventViewController: UIViewController, UINavigationControllerDelegate, Cre
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navigationController?.delegate = self
         
         // Set the navigation Title
