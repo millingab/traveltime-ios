@@ -17,12 +17,23 @@ class EventTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        loadSampleEvents()
         
         // Test get request 
         let requestmaker = ManagementServer()
         
-        requestmaker.getEventsList()
+        requestmaker.getEventsList(){ eventList, error in
+            if let e = eventList {
+                if e != self.events {
+                    self.events = e
+                }
+            }
+            for event in self.events{
+                print(event.name)
+            }
+            self.tableView.reloadData()
+        }
+        
+        //loadSampleEvents()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

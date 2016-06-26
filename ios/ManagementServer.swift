@@ -27,21 +27,31 @@ class ManagementServer{
     
     var events = [Event]()
     
-    func getEventsList(){
+    func getEventsList(callback: EventCallback?){
         Alamofire
             .request(.GET, BASE_URL+EVENT_PATH)
             .responseJSON{ response in switch response.result {
     
                 case .Success:
-                    print(response.result.value)
+                    self.events.removeAll()
                     if let JSON = response.result.value as? NSArray{
                         for eventJSON in JSON{
-                            print(eventJSON["name"])
+                            if let eventName = eventJSON["name"] as? String{
+                                let event = Event(name: eventName)
+                                self.events.append(event!)
+                            }
                         }
-                }
-                case .Failure:
+                    }
+                    if let cb = callback {
+                        cb(self.events,nil)
+                    }
+                case .Failure(let error):
                     debugPrint(response)
-                }
+                    if let cb = callback {
+                        cb(nil,error)
+                    }
+                
+            }
         }
     }
 }

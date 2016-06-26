@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Event {
+class Event: NSObject {
     
     // MARK: Properties
     
@@ -28,4 +28,5 @@ class Event {
             return nil
         }
     }
+
 }
