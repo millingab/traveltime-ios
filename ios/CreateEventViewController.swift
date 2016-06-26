@@ -26,6 +26,10 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
         
         // Handle the text field’s user input through delegate callbacks.
         eventName.delegate = self
+        
+        // Enable the Save button only if the text field has a valid Event name.
+        checkValidEventName()
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,8 +45,21 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(textField: UITextField) {
-        //event.name = textField.text
+        checkValidEventName()
+        navigationItem.title = textField.text
     }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        // Disable the Save button while editing.
+        saveButton.enabled = false
+    }
+    
+    func checkValidEventName() {
+        // Disable the Save button if the text field is empty.
+        let text = eventName.text ?? ""
+        saveButton.enabled = !text.isEmpty
+    }
+    
     
     // MARK: Navigation
     
