@@ -29,6 +29,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
         
         // Enable the Save button only if the text field has a valid Event name.
         checkValidEventName()
+        
+        // Set up the view
+        navigationItem.title = event?.name ?? "New Event"
 
     }
 
@@ -57,9 +60,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     func checkValidEventName() {
         // Disable the Save button if the text field is empty.
         let text = eventName.text ?? ""
+        
         saveButton.enabled = !text.isEmpty
     }
-    
     
     // MARK: Navigation
     
@@ -68,7 +71,6 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if saveButton === sender {
             event = Event(name: eventName.text ?? "")
         }

@@ -20,6 +20,8 @@
 		FC2D41531CF730970052C6ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2D41511CF730970052C6ED /* LaunchScreen.storyboard */; };
 		FC2D415E1CF730970052C6ED /* iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2D415D1CF730970052C6ED /* iosTests.swift */; };
 		FC5D0D151D1F6F8700A8B8BD /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5D0D141D1F6F8700A8B8BD /* EventTableViewController.swift */; };
+		FC6D58CF1D1FC246006354A6 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6D58CE1D1FC246006354A6 /* EventViewController.swift */; };
+		FC6D58D71D1FC3B9006354A6 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6D58D61D1FC3B9006354A6 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +120,8 @@
 		FC2D415D1CF730970052C6ED /* iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosTests.swift; sourceTree = "<group>"; };
 		FC2D415F1CF730970052C6ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC5D0D141D1F6F8700A8B8BD /* EventTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
+		FC6D58CE1D1FC246006354A6 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		FC6D58D61D1FC3B9006354A6 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC6D58D71D1FC3B9006354A6 /* MapKit.framework in Frameworks */,
 				FC205FDB1D1F7B590042CB49 /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,6 +169,7 @@
 		FC2D413C1CF730970052C6ED = {
 			isa = PBXGroup;
 			children = (
+				FC6D58D61D1FC3B9006354A6 /* MapKit.framework */,
 				FC2D41471CF730970052C6ED /* ios */,
 				FC2D415C1CF730970052C6ED /* iosTests */,
 				FC2D41461CF730970052C6ED /* Products */,
@@ -190,6 +196,7 @@
 				FC2D414C1CF730970052C6ED /* Main.storyboard */,
 				FC5D0D141D1F6F8700A8B8BD /* EventTableViewController.swift */,
 				FC121B111D1F610500E915DF /* Event.swift */,
+				FC6D58CE1D1FC246006354A6 /* EventViewController.swift */,
 				FC2D414F1CF730970052C6ED /* Assets.xcassets */,
 				FC2D41511CF730970052C6ED /* LaunchScreen.storyboard */,
 				FC2D41541CF730970052C6ED /* Info.plist */,
@@ -369,6 +376,7 @@
 			files = (
 				FC2D414B1CF730970052C6ED /* CreateEventViewController.swift in Sources */,
 				FC121B121D1F610500E915DF /* Event.swift in Sources */,
+				FC6D58CF1D1FC246006354A6 /* EventViewController.swift in Sources */,
 				FC2D41491CF730970052C6ED /* AppDelegate.swift in Sources */,
 				FC205FC21D1F783D0042CB49 /* ManagementServer.swift in Sources */,
 				FC205FBE1D1F6FE40042CB49 /* EventTableViewCell.swift in Sources */,

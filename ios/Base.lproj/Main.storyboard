@@ -34,6 +34,7 @@
                                 </constraints>
                                 <connections>
                                     <outlet property="nameLable" destination="0Yz-AD-mId" id="3Br-Ur-fKE"/>
+                                    <segue destination="MuE-Ma-m7d" kind="show" identifier="ViewEvent" id="vNk-Zh-rNt"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -139,7 +140,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <exit id="e2l-ac-4Hy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1993" y="398"/>
+            <point key="canvasLocation" x="2095" y="814"/>
+        </scene>
+        <!--Event-->
+        <scene sceneID="Dk7-ev-fQs">
+            <objects>
+                <viewController id="MuE-Ma-m7d" customClass="EventViewController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gbb-js-30D"/>
+                        <viewControllerLayoutGuide type="bottom" id="dEM-Z0-M9W"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FRg-0T-ZIO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Jma-8S-3Uy">
+                                <rect key="frame" x="0.0" y="64" width="600" height="370"/>
+                            </mapView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="84x-WC-9nu">
+                                <rect key="frame" x="0.0" y="433" width="600" height="167"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Event" id="DwJ-4P-S4V">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="wWh-5C-d1X">
+                            <connections>
+                                <segue destination="aoE-Nn-wgm" kind="presentation" identifier="EditEvent" id="Zh1-2t-2PT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vOX-fJ-eei" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="386" y="1245"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hvp-pb-nEI">
@@ -175,7 +210,10 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vIt-HN-o9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1181" y="398"/>
+            <point key="canvasLocation" x="1351" y="814"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Zh1-2t-2PT"/>
+    </inferredMetricsTieBreakers>
 </document>
