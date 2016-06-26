@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CreateEventViewController.swift
 //  ios
 //
 //  Created by Millin Gabani on 2016-05-26.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class CreateEventViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: Properties
 
