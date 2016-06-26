@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventViewController: UIViewController, CreateEventViewControllerDelegate {
+class EventViewController: UIViewController, UINavigationControllerDelegate, CreateEventViewControllerDelegate {
 
     // MARK: Properties
     
@@ -17,6 +17,8 @@ class EventViewController: UIViewController, CreateEventViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.delegate = self
+        
         // Set the navigation Title
         navigationItem.title = event?.name
         
@@ -42,10 +44,19 @@ class EventViewController: UIViewController, CreateEventViewControllerDelegate {
         }
     }
     
+    func navigationController(navigationController: UINavigationController, willShowViewController viewController: UIViewController, animated: Bool) {
+        if let eventTableViewController = viewController as? EventTableViewController{
+            eventTableViewController.fetchAndDisplayEvents()
+        }
+        
+    }
+
+    
     // MARK: CreateTableViewControllerDelegate
     
     func onDismiss(event: Event?) {
         if let e = event{
+            navigationItem.title = e.name
             ManagementServer.sharedInstance.updateEvent(e) { error in
                 if let _ = error {
                     debugPrint("There was a problem in updating the event: \(error)");

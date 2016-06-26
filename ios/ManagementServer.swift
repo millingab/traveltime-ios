@@ -86,10 +86,7 @@ class ManagementServer{
     func updateEvent(event: Event,callback: GeneralCallback?){
         let params = [
             "name": event.name,
-            ]
-        
-        print(event.name, event.id)
-        
+        ]
         Alamofire
             .request(.PUT, BASE_URL+EVENT_PATH+event.id, parameters: params, encoding: .JSON)
             .responseJSON{response in switch response.result {

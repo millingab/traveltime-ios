@@ -119,6 +119,7 @@ class EventTableViewController: UITableViewController, CreateEventViewController
             createEventViewController.delegate = self
         }
     }
+
     
     // MARK: CreateEventViewControllerDelegate
     
