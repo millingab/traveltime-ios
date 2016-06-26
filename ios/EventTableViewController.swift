@@ -18,40 +18,15 @@ class EventTableViewController: UITableViewController {
         super.viewDidLoad()
 
         
-        // Test get request 
-        let requestmaker = ManagementServer()
+        // Fetch and display the events
         
-        requestmaker.getEventsList(){ eventList, error in
-            if let e = eventList {
-                if e != self.events {
-                    self.events = e
-                }
-            }
-            for event in self.events{
-                print(event.name)
-            }
-            self.tableView.reloadData()
-        }
-        
-        //loadSampleEvents()
+        fetchAndDisplayEvents()
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-    }
-
-    func loadSampleEvents() {
-
-        let event1 = Event(name: "Test Event")
-        let event2 = Event(name: "Another Event")
-        let event3 = Event(name: "Final Test")
-        
-        events.append(event1!)
-        events.append(event2!)
-        events.append(event3!)
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -131,5 +106,46 @@ class EventTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func unwindToEventList(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.sourceViewController as?
+            CreateEventViewController, event = sourceViewController.event {
+            
+            self.postEventToServer(event)
+            
+        }
+    }
+    
+    // MARK: Helpers
+    
+    func fetchAndDisplayEvents() {
+        ManagementServer.sharedInstance.getEventsList(){ eventList, error in
+            if let e = eventList {
+                if e != self.events {
+                    self.events = e
+                }
+            }
+            for event in self.events{
+                print(event.name)
+            }
+            self.tableView.reloadData()
+            
+            if let _ = error {
+                debugPrint("There was a problem fetching eventlist: \(error)");
+            }
+        }
+    }
+    
+    func postEventToServer(event: Event?) {
+        if let e = event{
+            ManagementServer.sharedInstance.createEvent(e) { error in
+                self.fetchAndDisplayEvents()
+                
+                if let _ = error {
+                    debugPrint("There was a problem creating the event: \(error)");
+                }
+            }
+        }
+    }
 
 }

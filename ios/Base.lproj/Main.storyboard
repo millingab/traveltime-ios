@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wfa-Ln-4XH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="taT-27-M6c">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Event Table View Controller-->
+        <!--Event List-->
         <scene sceneID="JIy-8M-fsl">
             <objects>
                 <tableViewController id="Wfa-Ln-4XH" customClass="EventTableViewController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
@@ -15,7 +15,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EventTableViewCell" rowHeight="90" id="lwb-OK-2Ra" customClass="EventTableViewCell" customModule="ios" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="90"/>
+                                <rect key="frame" x="0.0" y="92" width="600" height="90"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lwb-OK-2Ra" id="aKe-S8-z6j">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="89.5"/>
@@ -42,12 +42,19 @@
                             <outlet property="delegate" destination="Wfa-Ln-4XH" id="Wii-vv-1Qe"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Event List" id="TSr-hh-Zms">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="rac-Eb-nVL">
+                            <connections>
+                                <segue destination="aoE-Nn-wgm" kind="presentation" identifier="AddEvent" id="dhR-lq-dLx"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9V-cB-hke" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-426" y="398"/>
+            <point key="canvasLocation" x="386" y="398"/>
         </scene>
-        <!--Create Event View Controller-->
+        <!--New Event-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CreateEventViewController" customModule="ios" customModuleProvider="target" sceneMemberID="viewController">
@@ -105,20 +112,66 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Zrd-BR-IjJ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="InB-FF-qYc"/>
-                            <constraint firstItem="Zrd-BR-IjJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="LIo-hY-zQy"/>
+                            <constraint firstItem="Zrd-BR-IjJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="16" id="LIo-hY-zQy"/>
                             <constraint firstItem="Zrd-BR-IjJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="cYi-mC-J3H"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="New Event" id="g5G-Dc-rGV">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Ruc-nR-kp5"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Sh0-Tw-9R0">
+                            <connections>
+                                <segue destination="e2l-ac-4Hy" kind="unwind" unwindAction="unwindToEventList:" id="7hc-CF-3AJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="eventAllDay" destination="C59-QH-EQb" id="L3J-bi-1i9"/>
                         <outlet property="eventName" destination="Ksl-ZH-GGA" id="xad-oU-nfa"/>
                         <outlet property="eventNotes" destination="986-gf-QKZ" id="T3a-Ch-1od"/>
                         <outlet property="eventStartTime" destination="hr1-eV-8T7" id="Ziy-LM-aSJ"/>
+                        <outlet property="saveButton" destination="Sh0-Tw-9R0" id="aIS-yN-I2V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <exit id="e2l-ac-4Hy" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="305" y="398"/>
+            <point key="canvasLocation" x="1993" y="398"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Hvp-pb-nEI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="taT-27-M6c" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="KC5-sc-IO5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Wfa-Ln-4XH" kind="relationship" relationship="rootViewController" id="f6c-IO-HlY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hhb-0k-fLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-426" y="398"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="bMb-hL-ieB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="aoE-Nn-wgm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nIj-Eq-mUU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Dr8-ZC-xDp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vIt-HN-o9u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1181" y="398"/>
         </scene>
     </scenes>
 </document>

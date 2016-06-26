@@ -16,6 +16,9 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var eventNotes: UITextView!
     @IBOutlet weak var eventAllDay: UISwitch!
     @IBOutlet weak var eventStartTime: UIDatePicker!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    var event: Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +42,15 @@ class CreateEventViewController: UIViewController, UITextFieldDelegate {
 
     func textFieldDidEndEditing(textField: UITextField) {
         //event.name = textField.text
+    }
+    
+    // MARK: Navigation
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if saveButton === sender {
+            event = Event(name: eventName.text ?? "")
+        }
     }
     
     // MARK: Actions

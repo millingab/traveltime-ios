@@ -10,7 +10,10 @@ import Alamofire
 
 class ManagementServer{
     
+    static let sharedInstance = ManagementServer()
+    
     typealias EventCallback = ([Event]?, NSError?)->()
+    typealias GeneralCallback = (NSError?)->()
 
     // By default, retry 3 times every 2 seconds.
     // Each retry times out after 5 seconds.
@@ -51,6 +54,28 @@ class ManagementServer{
                         cb(nil,error)
                     }
                 
+            }
+        }
+    }
+    
+    func createEvent(event: Event,callback: GeneralCallback?){
+        let params = [
+            "name": event.name,
+        ]
+        
+        Alamofire
+            .request(.POST, BASE_URL+EVENT_PATH, parameters: params, encoding: .JSON)
+            .responseJSON{response in switch response.result {
+            
+                case .Success:
+                    if let cb = callback{
+                        cb(nil)
+                    }
+                case .Failure(let error):
+                    debugPrint(response)
+                    if let cb = callback{
+                        cb(error)
+                    }
             }
         }
     }
