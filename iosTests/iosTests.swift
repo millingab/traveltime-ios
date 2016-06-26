@@ -33,4 +33,17 @@ class iosTests: XCTestCase {
         }
     }
     
+    // MARK: TravelTime Tests
+    
+    // Tests to confirm that the Event initializer returns when no name is provided.\
+    func testEventInitialization() {
+        
+        let potentialItem = Event(name: "Newest event")
+        XCTAssertNotNil(potentialItem)
+        
+        // Failure cases.
+        let noName = Event(name: "")
+        XCTAssertNil(noName, "Empty name is invalid")
+    }
+    
 }
